@@ -1,4 +1,4 @@
-p// Ürün verileri (json formatında)
+// Ürün verileri (json formatında)
 const products = [
     {
         id: 1,
@@ -126,7 +126,7 @@ function displayCartItems() {
         return;
     }
 
-    cartItem.innerHTML = '';
+    cartItems.innerHTML = '';
 
     cart.forEach(item => {
         const cartItem = document.createElement('div');
@@ -183,15 +183,15 @@ function removeFromCart(productId) {
 
 // Toplamları hesapla
 function updateTotals() {
-    const subtotal = cart.reduce(sum, item) => (item.price * item.quantity, 0);
+    const subtotal = cart.reduce((sum, item) => (item.price * item.quantity), 0);
     const shipping = subtotal > 500 ? 0 : 29.99;
     const tax = subtotal * 0.18;
     const total = subtotal + shipping + tax;
 
     subtotalElement.textContent = `${subtotal.toFixed(2)}₺`;
-    shippingElement.textContent = `${subtotal.toFixed(2)}₺`;
-    taxElement.textContent = `${subtotal.toFixed(2)}₺`;
-    totalElement.textContent = `${subtotal.toFixed(2)}₺`;
+    shippingElement.textContent = `${shipping.toFixed(2)}₺`;
+    taxElement.textContent = `${tax.toFixed(2)}₺`;
+    totalElement.textContent = `${total.toFixed(2)}₺`;
 }
 
 // Bildirim göster
@@ -227,7 +227,7 @@ checkoutBtn.addEventListener('click', () => {
     }
 
     const total = parseFloat(totalElement.textContent);
-    alert(`Ödeme simülasyonu: ${total.tofiex(2)}₺ tutarında ödeme alındı. Teşekkürler!`);
+    alert(`Ödeme simülasyonu: ${total.toFixed(2)}₺ tutarında ödeme alındı. Teşekkürler!`);
     cart = [];
     updateCart();
 });
