@@ -1,4 +1,4 @@
-// Ürün verileri (json formatında)
+// Ürün verileri (JSON formatında)
 const products = [
     {
         id: 1,
@@ -30,7 +30,7 @@ const products = [
     },
     {
         id: 5,
-        name: "Usb Bellek 128GB",
+        name: "USB Bellek 128GB",
         price: 199.99,
         icon: "fas fa-save",
         category: "Depolama"
@@ -41,6 +41,34 @@ const products = [
         price: 399.89,
         icon: "fas fa-battery-full",
         category: "Aksesuar"
+    },
+    {
+        id: 7,
+        name: "Web Kamera",
+        price: 349.99,
+        icon: "fas fa-video",
+        category: "Elektronik"
+    },
+    {
+        id: 8,
+        name: "Bluetooth Hoparlör",
+        price: 599.99,
+        icon: "fas fa-volume-up",
+        category: "Elektronik"
+    },
+    {
+        id: 9,
+        name: "Tablet Standı",
+        price: 149.99,
+        icon: "fas fa-tablet-alt",
+        category: "Aksesuar"
+    },
+    {
+        id: 10,
+        name: "USB Hub",
+        price: 129.99,
+        icon: "fas fa-plug",
+        category: "Aksesuar"
     }
 ];
 
@@ -48,10 +76,9 @@ const products = [
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // DOM Elementleri
-
 const productsGrid = document.getElementById('products');
 const cartItems = document.getElementById('cart-items');
-const cartCount = document.getElementById('cart-count');
+const cartCount = document.querySelector('.cart-count'); // DÜZELTİLDİ: querySelector
 const cartTotal = document.getElementById('cart-total');
 const subtotalElement = document.getElementById('subtotal');
 const shippingElement = document.getElementById('shipping');
@@ -62,11 +89,11 @@ const checkoutBtn = document.getElementById('checkout-btn');
 // Ürünleri göster
 function displayProducts() {
     productsGrid.innerHTML = '';
-
+    
     products.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
-
+        
         productCard.innerHTML = `
             <div class="product-image">
                 <i class="${product.icon}"></i>
@@ -79,16 +106,16 @@ function displayProducts() {
                 </button>
             </div>
         `;
-
+        
         productsGrid.appendChild(productCard);
     });
 }
 
-// Sepete Ekle
+// Sepete ekle
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     const cartItem = cart.find(item => item.id === productId);
-
+    
     if (cartItem) {
         cartItem.quantity += 1;
     } else {
@@ -97,24 +124,24 @@ function addToCart(productId) {
             quantity: 1
         });
     }
-
+    
     updateCart();
-    showNotification(`${product.name} sepete eklendi`);
+    showNotification(`${product.name} sepete eklendi!`);
 }
 
-// Sepeti Güncelle
+// Sepeti güncelle
 function updateCart() {
-    // localStorage'a Kaydet
+    // LocalStorage'a kaydet
     localStorage.setItem('cart', JSON.stringify(cart));
-
+    
     // Sepet sayacını güncelle
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartCount.textContent = totalItems;
     cartTotal.textContent = `${totalItems} ürün`;
-
+    
     // Sepet öğelerini göster
     displayCartItems();
-
+    
     // Toplamları hesapla
     updateTotals();
 }
@@ -125,51 +152,44 @@ function displayCartItems() {
         cartItems.innerHTML = '<p class="empty-cart">Sepetiniz boş</p>';
         return;
     }
-
+    
     cartItems.innerHTML = '';
-
+    
     cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.style.cssText = `
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
-        `;
-
+        const cartItemElement = document.createElement('div');
+        cartItemElement.className = 'cart-item';
+        
         cartItemElement.innerHTML = `
-            <div style="display:flex; align-items:center; gap:10px;">
-                <i class="${item.icon}" style="font-size:1.2rem; color: #667eea;"></i>
+            <div class="cart-item-info">
+                <i class="${item.icon} cart-item-icon"></i>
                 <div>
-                    <h4 style="margin-bottom:5px;">${item.name}</h4>
-                    <p style="color: #667eea; font-weight: bold;">${item.price.toFixed(2)}₺</p>
+                    <h4>${item.name}</h4>
+                    <p>${item.price.toFixed(2)}₺</p>
                 </div>
             </div>
-            <div style="display:flex; align-items: center; gap:10px;">
-                    <button onClick="updateQuantity(${item.id}, -1)" style="padding:5px 10px; background:#f1f2f6; border: none; border-radius: 3px; cursor: pointer;">-</button>
-                    <span style="font-weight:bold;">${item.quantity}</span>
-                    <button onclick="updateQuantity(${item.id},1)" style="padding: 5px 10px; background: #f1f2f6; border:none; border-radius:3px; cursor: pointer;">+</button>
-                    <button onclick="removeFromCart(${item.id})" style="margin-left: 10px; padding: 5px 10px; background: #ff6b81; color:white; border:none; border-radius: 3px; cursor: pointer;">Sil</button>
+            <div class="cart-item-buttons">
+                <button onclick="updateQuantity(${item.id}, -1)" class="quantity-btn">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="updateQuantity(${item.id}, 1)" class="quantity-btn">+</button>
+                <button onclick="removeFromCart(${item.id})" class="remove-btn">Sil</button>
             </div>
         `;
-
-        cartItems.appendChild(cartItem);
+        
+        cartItems.appendChild(cartItemElement);
     });
 }
 
 // Miktarı güncelle
 function updateQuantity(productId, change) {
     const cartItem = cart.find(item => item.id === productId);
-
+    
     if (cartItem) {
         cartItem.quantity += change;
-
+        
         if (cartItem.quantity <= 0) {
-            cart = cart.filter(item => item.id === productId);
+            cart = cart.filter(item => item.id !== productId);
         }
-
+        
         updateCart();
     }
 }
@@ -178,16 +198,16 @@ function updateQuantity(productId, change) {
 function removeFromCart(productId) {
     cart = cart.filter(item => item.id !== productId);
     updateCart();
-    showNotification('Ürün sepetten çıkarıldı!')
+    showNotification('Ürün sepetten çıkarıldı!');
 }
 
 // Toplamları hesapla
 function updateTotals() {
-    const subtotal = cart.reduce((sum, item) => (item.price * item.quantity), 0);
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const shipping = subtotal > 500 ? 0 : 29.99;
     const tax = subtotal * 0.18;
     const total = subtotal + shipping + tax;
-
+    
     subtotalElement.textContent = `${subtotal.toFixed(2)}₺`;
     shippingElement.textContent = `${shipping.toFixed(2)}₺`;
     taxElement.textContent = `${tax.toFixed(2)}₺`;
@@ -196,7 +216,6 @@ function updateTotals() {
 
 // Bildirim göster
 function showNotification(message) {
-    // Basit bir bildirim sistemi
     const notification = document.createElement('div');
     notification.textContent = message;
     notification.style.cssText = `
@@ -211,12 +230,13 @@ function showNotification(message) {
         z-index: 1000;
         animation: slideIn 0.3s ease;
     `;
-
+    
     document.body.appendChild(notification);
-
+    
     setTimeout(() => {
-        notification.remove();
-    }, 3000);
+        notification.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 2700);
 }
 
 // Ödeme butonu event'i
@@ -225,7 +245,7 @@ checkoutBtn.addEventListener('click', () => {
         alert('Sepetiniz boş!');
         return;
     }
-
+    
     const total = parseFloat(totalElement.textContent);
     alert(`Ödeme simülasyonu: ${total.toFixed(2)}₺ tutarında ödeme alındı. Teşekkürler!`);
     cart = [];
@@ -236,4 +256,4 @@ checkoutBtn.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     displayProducts();
     updateCart();
-})
+});

@@ -4,19 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="javascript E-Ticaret sepet sistemi">
-    <meta name="keywords" content="e-Ticaret, javascript, sepet, alışveriş, github projesi">
-    <title>E-Ticaret Sepet Sistemi</title>
+    <meta name="description" content="JavaScript E-Ticaret Sepet Sistemi - GitHub Portföy Projesi">
+    <meta name="keywords" content="e-ticaret, javascript, sepet, alışveriş, github projesi">
+    <title>🛒 E-Ticaret Sepet Sistemi | GitHub Projesi</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
 </head>
 
 <body>
     <header>
         <div class="container">
-            <h1><i class="fas fa-shopping-cart"></i>TechShop</h1>
+            <h1><i class="fas fa-shopping-cart"></i> TechShop</h1>
             <div class="cart-icon">
                 <i class="fas fa-shopping-bag"></i>
                 <span class="cart-count">0</span>
@@ -27,8 +26,9 @@
     <main class="container">
         <section class="products-section">
             <h2>Ürünlerimiz</h2>
-            <div class="products-grid" id="products"></div>
-            <!-- ürünler javascript ile eklenecek -->
+            <div class="products-grid" id="products">
+                <!-- ürünler javascript ile eklenecek -->
+            </div>
         </section>
 
         <section class="cart-section">
@@ -42,19 +42,19 @@
                     <h3>Sipariş Özeti</h3>
                     <div class="summary-item">
                         <span>Ara Toplam:</span>
-                        <span id="subtotal">0.000₺</span>
+                        <span id="subtotal">0.00₺</span>
                     </div>
                     <div class="summary-item">
                         <span>Kargo:</span>
-                        <span id="shipping">0.000₺</span>
+                        <span id="shipping">0.00₺</span>
                     </div>
                     <div class="summary-item">
-                        <span>KDV (%18)</span>
-                        <span id="tax">0.000₺</span>
+                        <span>KDV (%18):</span>
+                        <span id="tax">0.00₺</span>
                     </div>
                     <div class="summary-item total">
-                        <span>Total:</span>
-                        <span id="total">0.000₺</span>
+                        <span>Toplam:</span>
+                        <span id="total">0.00₺</span>
                     </div>
                     <button class="checkout-btn" id="checkout-btn">ÖDEMEYİ TAMAMLA</button>
                 </div>
@@ -67,14 +67,14 @@
             <p>Bu proje GitHub portföyü için geliştirilmiştir</p>
             <p class="github-link">
                 <i class="fab fa-github"></i>
-                <a href="https://github.com/bugracanu/ecommerce-cart" target="_blank">Github Reposu</a>
+                <a href="https://github.com/bugracanu/ecommerce-cart" target="_blank" rel="noopener noreferrer">
+                    GitHub Reposu
+                </a>
             </p>
         </div>
     </footer>
 
-
     <script src="script.js"></script>
-
 </body>
 
 </html>
