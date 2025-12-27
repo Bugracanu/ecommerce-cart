@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Ticaret Sepet Sistemi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-shopping-cart"></i>TechShop</h1>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="products-section">
+            <h2>Ürünlerimiz</h2>
+            <div class="products-grid" id="products"></div>
+            <!-- ürünler javascript ile eklenecek -->
+        </section>
+
+        <section class="cart-section">
+            <h2>Alışveriş Sepetin <span id="cart-total">0 Ürün</span></h2>
+            <div class="cart-container">
+                <div class="cart-items" id="cart-items">
+                    <!-- Sepet öğeleri buraya gelecek -->
+                    <p class="empty-cart">Sepetiniz Boş</p>
+                </div>
+                <div class="cart-summary">
+                    <h3>Sipariş Özeti</h3>
+                    <div class="summary-item">
+                        <span>Ara Toplam:</span>
+                        <span id="subtotal">0.000</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Kargo:</span>
+                        <span id="shipping">0.000</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>KDV (%18)</span>
+                        <span id="tax">0.000</span>
+                    </div>
+                    <div class="summary-item total">
+                        <span>Total:</span>
+                        <span id="total">0.000</span>
+                    </div>
+                    <button class="checkout-btn" id="checkout-btn">ÖDEMEYİ TAMAMLA</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Bu proje GitHub portföyü için geliştirilmiştir</p>
+            <p class="github-link">
+                <i class="fab fa-github"></i>
+                <a href="https://github.com/bugracanu/ecommerce-cart" target="_blank">Github Reposu</a>
+            </p>
+        </div>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
