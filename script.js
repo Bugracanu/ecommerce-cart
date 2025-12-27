@@ -139,7 +139,7 @@ function displayCartItems() {
             border-bottom: 1px solid #eee;
         `;
 
-        cartItem.innerHTML = `
+        cartItemElement.innerHTML = `
             <div style="display:flex; align-items:center; gap:10px;">
                 <i class="${item.icon}" style="font-size:1.2rem; color: #667eea;"></i>
                 <div>
