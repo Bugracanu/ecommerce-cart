@@ -250,44 +250,39 @@ function removeFromCart(productId) {
 
 // Toplamları hesapla
 function updateTotals() {
-    if (cart.length === 0 ) {
-        subtotalElement.textContent = '0.00₺';
-        discountRow.style.display = 'none';
-        discountAmount.textContent = '-0.00₺';
-        shippingElement.textContent = '0.00₺';
-        taxElement.textContent = '0.00₺';
-        totalElement.textContent = '0.00₺';
-        return
-    }
-
-    let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     let discount = 0;
+    let shipping = subtotal > 500 ? 0 : 29.99;
 
     if (activeCoupon) {
         if (activeCoupon.type === "percentage") {
             discount = subtotal * (activeCoupon.discount / 100);
         } else if (activeCoupon.type === "fixed") {
             discount = activeCoupon.discount;
+        } else if (activeCoupon.type === "special" && activeCoupon.discount === "free-shipping") {
+            shipping = 0;
         }
     }
 
-    const discountedSubTotal = subtotal - discount;
-
-    let shipping = discountedSubTotal > 500 || (activeCoupon && activeCoupon.discount === "free-shipping") ? 0 : 29.99;
-    const tax = discountedSubTotal * 0.18;
-    const total = discountedSubTotal + shipping + tax;
+    const discountedSubtotal = subtotal - discount;
+    const tax = discountedSubtotal * 0.18;
+    const total = discountedSubtotal + shipping + tax;
 
     subtotalElement.textContent = `${subtotal.toFixed(2)}₺`;
-    discountAmount.textContent = discount > 0 ? `-${discount.toFixed(2)}₺` : (activeCoupon && activeCoupon.discount === "free-shipping" ? 'Ücretsiz Kargo' : '-0.00₺');
-    shippingElement.textContent = shipping === 0 ? 'ücretsiz' : `${shipping.toFixed(2)}₺`;
-    taxElement.textContent = `${tax.toFixed(2)}₺`;
-    totalElement.textContent = `${total.toFixed(2)}₺`;
 
-    if (discount > 0 || (activeCoupon && activeCoupon.discount === "free-shipping")) {
+    if (discount > 0) {
         discountRow.style.display = 'flex';
+        discountAmount.textContent = `-${discount.toFixed(2)}₺`;
+    } else if (activeCoupon && activeCoupon.discount === "free-shipping") {
+        discountRow.style.display = 'flex';
+        discountAmount.textContent = 'Ücretsiz Kargo';
     } else {
         discountRow.style.display = 'none';
     }
+
+    shippingElement.textContent = shipping === 0 ? 'Ücretsiz' : `${shipping.toFixed(2)}₺`;
+    taxElement.textContent = `${tax.toFixed(2)}₺`;
+    totalElement.textContent = `${total.toFixed(2)}₺`;
 }
 
 // Bildirim göster
@@ -323,7 +318,7 @@ function showCouponMessage(message, type) {
 
 // Kupon uygulama fonksiyonu
 function applyCoupon() {
-    const cuoponCode = couponInput.value.trim().toUpperCase();
+    const couponCode = couponInput.value.trim().toUpperCase();
 
     if (!couponCode) {
         showCouponMessage("Lütfen bir kupon kodu girin", "error");
@@ -360,6 +355,18 @@ function applyCoupon() {
 
     discountRow.style.display = 'flex';
     updateTotals();
+}
+
+function showCouponMessage(message, type) {
+    couponMessage.textContent  = message;
+    couponMessage.className = `coupon-message ${type}`;
+
+    if (type === "error") {
+        setTimeout(() => {
+            couponMessage.textContent = "";
+            couponMessage.className = "coupon-message";
+        }, 5000);
+    }
 }
 
 
