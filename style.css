@@ -206,6 +206,93 @@ h2 {
     overflow-y: auto;
 }
 
+/* Kupon sistemi stilleri */
+.coupon-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f8fff8;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.coupon-input-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: stretch;
+    margin-bottom: 0.5rem;
+}
+
+#coupon-input {
+    flex: 1 1 200px;
+    min-width: 0;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    transition: border-color 0.3s;
+}
+
+#coupon-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.coupon-btn {
+    flex: 0 0 auto;
+    padding: 0.8rem 1.5rem;
+    white-space: nowrap;
+    background: #4cd137;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+
+.coupon-btn:hover {
+    background: #44bd32;
+}
+
+.coupon-btn:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+.coupon-message {
+    font-size: 0.9rem;
+    min-height: 24px;
+    text-align: center;
+}
+
+.coupon-message.success {
+    color: #4cd137;
+    font-weight: 500;
+}
+
+.coupon-message.error {
+    color: #ff6b81;
+    font-weight: 500;
+}
+
+/* İndirim satırı */
+.summary-item.discount {
+    color: #4cd137;
+    font-weight: bold;
+}
+
+/* Kupon uygulanmış sepette */
+.coupon-applied #coupon-input {
+    background-color: #f8fff8;
+    border-color: #4cd137;
+}
+
+
 /* Scrollbar Stili */
 .cart-items::-webkit-scrollbar {
     width: 8px;

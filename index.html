@@ -40,9 +40,22 @@
                 </div>
                 <div class="cart-summary">
                     <h3>Sipariş Özeti</h3>
+                    <div class="coupon-section">
+                        <div class="coupon-input-group">
+                            <input type="text" id="coupon-input" placeholder="Kupon kodunuzu girin">
+                            <button id="apply-coupon" class="coupon-btn">
+                                <i class="fas fa-tag"></i>Uygula
+                            </button>
+                        </div>
+                        <div class="coupon-message" id="coupon-message"></div>
+                    </div>
                     <div class="summary-item">
                         <span>Ara Toplam:</span>
                         <span id="subtotal">0.00₺</span>
+                    </div>
+                    <div class="summary-item discount" id="discount-row" style="display: none;">
+                        <span>İndirim:</span>
+                        <span id="discount-amount">-0.000₺</span>
                     </div>
                     <div class="summary-item">
                         <span>Kargo:</span>
