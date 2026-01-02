@@ -310,12 +310,6 @@ function showNotification(message) {
     }, 2700);
 }
 
-// Kupon mesajı göster
-function showCouponMessage(message, type) {
-    couponMessage.textContent = message;
-    couponMessage.className = `coupon-message ${type}`;
-}
-
 // Kupon uygulama fonksiyonu
 function applyCoupon() {
     const couponCode = couponInput.value.trim().toUpperCase();
@@ -358,7 +352,7 @@ function applyCoupon() {
 }
 
 function showCouponMessage(message, type) {
-    couponMessage.textContent  = message;
+    couponMessage.textContent = message;
     couponMessage.className = `coupon-message ${type}`;
 
     if (type === "error") {

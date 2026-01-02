@@ -271,18 +271,39 @@ h2 {
 }
 
 .coupon-message.success {
-    color: #4cd137;
-    font-weight: 500;
+    color: #27ae60;
+    font-weight: 600;
 }
 
 .coupon-message.error {
-    color: #ff6b81;
-    font-weight: 500;
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+#coupon-input:disabled {
+    background-color: #f0fff4;
+    border-color: #27ae60;
+    color: #27ae60;
 }
 
 /* İndirim satırı */
 .summary-item.discount {
-    color: #4cd137;
+    color: #27ae60 !important;
+    font-weight: bold;
+    font-size: 1.05rem;
+}
+
+.summary-item.discount span:first-child::before {
+    content: "🎉";
+}
+
+#shipping {
+    transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+#shipping [textContent="Ücretsiz"],
+#shipping:contains("Ücretsiz") {
+    color: #27ae60 !important;
     font-weight: bold;
 }
 
@@ -398,13 +419,13 @@ h2 {
 }
 
 .summary-item.total {
-    font-size: 1.2rem;
+    font-size: 1.5rem !important;
     font-weight: bold;
-    color: #2d3436;
-    border-top: 2px solid #667eea;
+    color: #667eea;
+    padding: 1.2rem 0;
     margin-top: 1rem;
-    padding-top: 1rem;
-    border-bottom: none;
+    border-top: 3px double #667eea;
+    background: linear-gradient(to right, rgba(102, 126, 234, 0.05), transparent);
 }
 
 .checkout-btn {
@@ -467,6 +488,7 @@ footer {
         transform: translateX(100%);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;
@@ -477,6 +499,7 @@ footer {
     from {
         opacity: 1;
     }
+
     to {
         opacity: 0;
     }
@@ -487,7 +510,7 @@ footer {
     .cart-container {
         grid-template-columns: 1fr;
     }
-    
+
     .cart-summary {
         position: static;
     }

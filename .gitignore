@@ -1,0 +1,10 @@
+# Sistem Dosyaları
+Thumbs.db
+.DS_Store
+
+# Editör Ayarları
+.vscode/
+.idea/
+
+# Loglar
+*.log
